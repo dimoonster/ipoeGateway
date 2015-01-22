@@ -1,0 +1,49 @@
+<div style="height:400px">
+    <div class="speedList">
+	<div class="title">
+	    <div class="titleTime">Время</div>
+	    <div class="titleSpeed">Скорость</div>
+	    <div class="titleCost">Стоимость</div>
+	    <div class="clr"></div>
+	</div>
+	<div class="data">
+{for $index=0 to 23}
+	<div class="line">
+	    <div class="elem1">{$P1ARR[$index]["time"]}</div>
+	    <div class="elem2">{$P1ARR[$index]["speed"]} Мбит/с</div>
+	    <div class="elem3">{$P1ARR[$index]["cost"]} руб.</div>
+	    <div class="clr"></div>
+	</div>
+{/for}
+	</div>
+    </div>
+    <div class="createOptions">
+	<div class="title">Информация о тарифе</div>
+
+	<div class="line"><div class="label">Абонентная плата:</div><div class="value">{$TOTAL_COST} руб.</div></div>
+	<div class="clr"></div>
+	<div class="line"><div class="label">Среднесуточная скорость:</div><div class="value">{$TOTAL_SPEED} Мбит/с</div></div>
+
+	<div class="lineErr" {if $ERR_STR==""}style="display:none"{/if}>{$ERR_STR}</div>
+	<div class="clr"></div>
+	
+	<div class="createForm">
+	<form method="post" action="{$BASE_URL}{$SERVICE_URL}&createForm{$AJAX}&page2" id="createTariff" name="createTariff">
+	
+	<input type="hidden" name="trfdata" value="{$TRF_DATA}" />
+	
+	<div class="line"><label>Введите название тарифа:</label><input class="text" type="text" name="tname" value="{$TRF_NAME}" /></div>
+	<div class="clr"></div>
+	<div class="line"><label>Введите описание тарифа:</label><input class="text" type="text" name="tdescr" value="{$TRF_DESCR}" /></div>
+	<div class="clr"></div>
+	<div class="line"><label>Поделиться тарифом:</label><input class="text" type="checkbox" name="tshare" value="1"{if $TRF_SHARED!=0} checked{/if} /></div>
+	<div class="clr"></div>
+	<div class="lineSubmit"><input type="submit" value="Создать тариф" /></div>
+	</form>
+	</div>
+    </div>
+</div>
+
+<script>
+$('#createTariff').ajaxForm({ target: '#ajaxContent' });
+</script>

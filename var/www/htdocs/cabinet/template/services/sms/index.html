@@ -1,0 +1,70 @@
+<div class="s_title">Услуга: SMS Уведомления</div>
+<div class="ss_info">
+  <span class="title">Правила пользования и описание услуги</span>
+  <ul>
+    <li>Услуга "SMS уведомления" служит для отсылки посредством SMS уведомлений: о необходимости пополнить лицевой счет, о проводимых акциях, о работах и авариях на сети, о подтверждении действий абонента в личном кабинете</li>
+    <li>SMS о пополнении лицевого счёта отсылается не ранее чем за 3 суток до окончания текущего отчетного периода, если на лицевом счете пользователя находится сумма, недостаточная для активации тарифного плана</li>
+    <li>В сообщении указывается номер договора и сумма, на которую небходимо пополнить лицевой счет</li>
+    <li>Для включения услуги пользователь должен указать федеральный номер сотового телефона и временной промежуток суток, в который он желает получать SMS уведомления о необходимости пополнить лицевой счёт.</li>
+    <li>Услуга предоставляется бесплатно</li>
+  </ul>
+</div>
+
+<div class="hrline"></div>
+<div class="sms_ph_info">Вами был указан номер телефона: {$USER_PHONE}</div>
+
+{if $USER_PHONE_WRONG==1}
+<div class="sms_ph_info errmsg">На указанный телефон доставка SMS не возможна!</div>
+{/if}
+
+<div class="sms_form">
+<div class="sms_form_resize">
+<form method="post" action="{$BASE_URL}?services&sms&phupdate">
+<div class="container"><label>Введите номер мобильного телефона:</label></div>
+<div class="clr"></div>
+<span class="plus7">+7</span>
+<select name="code" style="code">
+{foreach $MOBILE_CODES as $code}
+    <option value="{$code}"{if $code==$USER_PHONE_CODE} selected{/if}>{$code}</option>
+{/foreach}
+</select>
+<input type="text" name="number" id="number" name="number" value="{$USER_PHONE_NUM}" /><div class="errmsg" id="errmsg" name="errmsg"></div>
+<input id="sms_f_submit" type="submit" value="Обновить номер телефона" />
+</form>
+</div>
+</div>
+
+<div class="hrline"></div>
+
+<div style="">
+<div id="sw" name="sw"></div>
+<div id="swresult" name="swresult" style="margin:auto;width:200px;text-align:center;font:bold 14px Arial;">{$STATUS_TEXT}</div>
+</div>
+
+<script>
+$("#number").keypress(function (e) { 
+    //Если символ - не цифра, ввыодится сообщение об ошибке, другие символы не пишутся
+    if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57)) {
+          //Вывод сообщения об ошибке
+        $("#errmsg").html("Только цифры").show().delay(800).fadeOut("slow"); 
+        return false;
+    }
+    
+    if($(this).attr("value").length >= 7) {
+//        $("#errmsg").html("не больше 7 цифр").show().delay(800).fadeOut("slow"); 
+        return false;
+    }
+});
+
+$("#sms_f_submit").button();
+
+$("#sw").iphoneSwitch("{$STATUS}",
+function() { $("#sw").attr('disabled', 'disabled');$('#swresult').load('{$BASE_URL}?services&sms&ajax&start');$("#sw").attr('disabled', 'disabled'); },
+function() { $("#sw").attr('disabled', 'disabled');$('#swresult').load('{$BASE_URL}?services&sms&ajax&stop');$("#sw").attr('disabled', 'disabled'); },
+{
+    switch_on_container_path: '{$BASE_URL}images/iphone/iphone_switch_container_on.png',
+    switch_off_container_path: '{$BASE_URL}images/iphone/iphone_switch_container_off.png',
+    switch_path: '{$BASE_URL}images/iphone/iphone_switch.png'
+}
+);
+</script>

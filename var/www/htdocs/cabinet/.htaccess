@@ -1,0 +1,2 @@
+ErrorDocument 404 /cabinet/40x.php
+ErrorDocument 403 /cabinet/40x.php

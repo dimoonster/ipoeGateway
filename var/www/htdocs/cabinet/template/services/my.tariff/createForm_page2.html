@@ -1,0 +1,38 @@
+<div style="height:400px">
+    <div class="speedList">
+	<div class="title">
+	    <div class="titleTime">Время</div>
+	    <div class="titleSpeed">Скорость</div>
+	    <div class="titleCost">Стоимость</div>
+	    <div class="clr"></div>
+	</div>
+	<div class="data">
+{for $index=0 to 23}
+	<div class="line">
+	    <div class="elem1">{$P1ARR[$index]["time"]}</div>
+	    <div class="elem2">{$P1ARR[$index]["speed"]} Мбит/с</div>
+	    <div class="elem3">{$P1ARR[$index]["cost"]} руб.</div>
+	    <div class="clr"></div>
+	</div>
+{/for}
+	</div>
+    </div>
+    <div class="createOptions">
+	<div class="title">Информация о тарифе</div>
+
+	<div class="line"><div class="label">Абонентная плата:</div><div class="value">{$TOTAL_COST} руб.</div></div>
+	<div class="clr"></div>
+	<div class="line"><div class="label">Среднесуточная скорость:</div><div class="value">{$TOTAL_SPEED} Мбит/с</div></div>
+	<div class="clr"></div>
+	
+	<div class="line"><div class="label">Название тарифа:</div><div class="value">{$TRF_NAME}</div></div><div class="clr"></div>
+	<div class="line"><div class="label">Описание тарифа:</div><div class="value">{$TRF_DESCR}</div></div><div class="clr"></div>
+	<div class="line"><div class="label">Тариф доступен:</div><div class="value">{if $TRF_SHARED==1}всем{else}только мне{/if}</div></div><div class="clr"></div>
+
+	<div class="line">Тариф был успешно создан. Теперь вы можете закрыть это окно и выбрать его в списке "Мои тарифы"</div>
+    </div>
+</div>
+
+<script>
+$('#createTariff').ajaxForm({ target: '#ajaxContent' });
+</script>

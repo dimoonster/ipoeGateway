@@ -1,0 +1,29 @@
+<div class="infoBlock">
+    <div class="title">{$ABONENT["FullName"]}</div>
+    <div class="clr"></div>
+    <div class="line"><label>Баланс лицевого счёта:</label><span>{$ABONENT["Balance"]} руб.</span></div>
+    <div class="clr"></div>
+    <div class="line"><label>Номер договора:</label><span>{$ABONENT["ContractNumber"]} от {$ABONENT["ContractDate"]|date_format:"%e %b %Y"}</span></div>
+    <div class="clr"></div>
+    <div class="line"><label>Активная учётная запись:</label><span{if $ACCOUNT_STATUS==0} class="on"{else} class="off"{/if}>{$ACCOUNT_NAME} ({if $ACCOUNT_STATUS==0}Включена{else}Отключена{/if})</span></div>
+    <div class="clr"></div>
+</div>
+<div class="infoSpacer"></div>
+<div class="infoBlock">
+    <div class="title">Реквизиты</div>
+    <div class="clr"></div>
+    <div class="line"><label>E-Mail:</label><span>{$ABONENT["Email"]}</span></div><div class="clr"></div>
+    <div class="line"><label>Тип абонента:</label><span>{if $ABONENT["PrivatePerson"]==1}Физическое лицо{else}Юридическое лицо{/if}</span></div><div class="clr"></div>
+    <div class="line"><label>Адрес:</label><span>{$ABONENT["OfficialAddress"]}</span></div><div class="clr"></div>
+{if $ABONENT["PrivatePerson"]==1}
+    <div class="line"><label>Паспортные данные:</label><span>{$ABONENT["PassportSerie"]}&nbsp;{$ABONENT["PassportNumber"]}</span></div><div class="clr"></div>
+    <div class="line"><label>Паспорт выдан:</label><span>{$ABONENT["PassportGivenDate"]|date_format:"%e %b %Y"}&nbsp;{$ABONENT["PassportGiven"]}</span></div><div class="clr"></div>
+{else}    
+    <div class="line"><label>ИНН:</label><span>{$ABONENT["Inn"]}</span></div><div class="clr"></div>
+    <div class="line"><label>Банк:</label><span>{$ABONENT["Bank"]}</span></div><div class="clr"></div>
+    <div class="line"><label>Р/С</label><span>{$ABONENT["RS"]}</span></div><div class="clr"></div>
+    <div class="line"><label>К/С</label><span>{$ABONENT["KS"]}</span></div><div class="clr"></div>
+    <div class="line"><label>БИК</label><span>{$ABONENT["Bik"]}</span></div><div class="clr"></div>
+{/if}
+    <div class="infoline"><b>Внимание!</b> Если вы заметили не правильные данные, <br />либо они изменились с момента заключения договора, <br />сообщите об этом нам.</div>
+</div>

@@ -1,0 +1,55 @@
+<style>
+.choose { width:900px; height:400px;}
+.choose .ctitle { font: bold 14px Tahoma; text-align:center; padding-bottom:4px; border-bottom:1px dashed #aaaaaa;}
+.cline a { color:#1d9ad6; text-decoration:none; font-weight:bold;}
+.cline a:hover { text-decoration:underline; }
+</style>
+
+<div class="choose">
+    <div class="ctitle">Тариф {$TARIFF["name"]}</div>
+    <div class="clr"></div>
+
+    <div class="speedList">
+	<div class="title">
+	    <div class="titleTime">Время</div>
+	    <div class="titleSpeed">Скорость</div>
+	    {if $OPERATOR==""}<div class="titleCost">Стоимость</div>{/if}
+	    <div class="clr"></div>
+	</div>
+	<div class="data">
+    {for $index=0 to 23}
+	    <div class="line">
+		<div class="elem1">{$P1ARR[$index]["time"]}</div>
+		<div class="elem2">{$P1ARR[$index]["speed"]} Мбит/с</div>
+		{if $OPERATOR==""}<div class="elem3">{$P1ARR[$index]["cost"]} руб.</div>{/if}
+		<div class="clr"></div>
+	    </div>
+    {/for}
+	</div>
+    </div>
+
+    <div class="createOptions">
+        <div class="title">Информация о тарифе</div>
+        
+        <div class="linedescr">Описание: <em>{$TARIFF["descr"]}</em></div>
+
+        <div class="line"><div class="label">Абонентная плата:</div><div class="value">{if $OPERATOR==""}{$TOTAL_COST}{else}{$TARIFF["cost"]}{/if} руб.</div></div>
+        <div class="clr"></div>
+        <div class="line"><div class="label">Среднесуточная скорость:</div><div class="value">{$TOTAL_SPEED} Мбит/с</div></div>
+        <div class="clr"></div>
+        <div class="hrline"></div>
+        <div class="clr"></div>
+        <div class="line">Нажимая на кнопку "Активировать тариф", я соглашаюсь с тем, что начиная с <b>{$CURRENT_TARIFF_DATE|date_format:"%d %b %Y"}</b> на учётной записи <b>{$ACCOUNT_NAME}</b> доступ в сеть Интернет мне будет предоставляться в соответствии с параметрами указанными в таблице в левой части данного окна и абонентная плата составит <b>{if $OPERATOR==""}{$TOTAL_COST}{else}{$TARIFF["cost"]}{/if}</b> руб. {if $OPERATOR==""}<small>(Абонентная плата формируется из: Абонентной платы за услугу "Мой.Тариф" в размере {$MINIMAL_COST} рублей и суммарной оплаты за доступ в сеть интернет в размере {$TOTAL_COST-$MINIMAL_COST} рублей)</small>{/if}</div>
+        <div class="hrline"></div>
+        <div class="clr"></div>
+        <div class="cline"><a id="aconfirm" name="aconfirm" href="{$BASE_URL}{$SERVICE_URL}{$AJAX}{$OPERATOR}&choose={$TARIFF["id"]}&confirm">Активировать тариф</a></div>
+
+    </div>
+</div>
+
+<script>
+$("#aconfirm").click(function () {
+    $("#ajaxContent").load($(this).attr('href'));
+    return false;
+});
+</script>

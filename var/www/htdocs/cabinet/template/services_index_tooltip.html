@@ -1,0 +1,113 @@
+<div class="bubbleInfo">
+    <div class="icon"><img class="trigger" src="{$BASE_URL}images/icons/28.png" /><p class="info">ТУРБО.Кнопка</p></div>
+    
+    <div class="popup">
+	<div class="info">
+	    wqerwerwerwerw
+	</div>
+    </div>
+</div>
+
+<div class="bubbleInfo">
+    <div class="icon"><img class="trigger" src="{$BASE_URL}images/icons/19.png" /><p class="info clr">SMS Уведомления</p></div>
+    
+    <div class="popup">
+	<div class="info">
+	    wqerwerwerwerw
+	</div>
+    </div>
+</div>
+
+<div class="bubbleInfo">
+    <div class="icon"><img class="trigger" src="{$BASE_URL}images/icons/18.png" /><p class="info">Мой.Тариф</p></div>
+    
+    <div class="popup">
+	<div class="info">
+	    wqerwerwerwerw
+	</div>
+    </div>
+</div>
+
+<div class="bubbleInfo">
+    <div class="icon"><img class="trigger" src="{$BASE_URL}images/icons/27.png" /><p class="info">Приостановка обслуживания</p></div>
+    
+    <div class="popup">
+	<div class="info">
+	    wqerwerwerwerw
+	</div>
+    </div>
+</div>
+
+<div class="bubbleInfo">
+    <div class="icon"><img class="trigger" src="{$BASE_URL}images/icons/30.png" /><p class="info">Обещанный платёж</p></div>
+    
+    <div class="popup">
+	<div class="info">
+	    <div class="title">Обещанный платёж</div>
+	    <p>Обещанный платеж — возможность увеличивать баланс до 1500 рублей на 5 дней. В течение этого срока можно пользоваться услугами связи на сумму, не превышающую величину условного баланса. </p>
+	    <p>Услуга позволит оставаться на связи, даже если на счете закончились деньги, а пополнить счет нет возможности.</p>
+	    <p>Воспользоваться услугой «Обещанный платеж» могут абоненты физические лица, обслуживающиеся в компании более шести месяцев и не находящиеся в добровольной блокировке.</p>
+	</div>
+    </div>
+</div>
+
+<div class="clr"></div>
+
+<script type="text/javascript">
+<!--
+$(function () {
+    $('.bubbleInfo').each(function () {
+        var distance = 10;
+        var time = 250;
+        var hideDelay = 500;
+
+        var hideDelayTimer = null;
+
+        var beingShown = false;
+        var shown = false;
+        var trigger = $('.trigger', this);
+        var info = $('.popup', this).css('opacity', 0);
+
+        $([trigger.get(0), info.get(0)]).mouseover(function () {
+            if (hideDelayTimer) clearTimeout(hideDelayTimer);
+            if (beingShown || shown) {
+                // don't trigger the animation again
+                return;
+            } else {
+                // reset position of info box
+                beingShown = true;
+
+                info.css({
+                    top: 368,
+                    left: 0,
+                    display: 'block'
+                }).animate({
+                    top: '+=' + distance + 'px',
+                    opacity: 1
+                }, time, 'swing', function() {
+                    beingShown = false;
+                    shown = true;
+                });
+            }
+
+            return false;
+        }).mouseout(function () {
+            if (hideDelayTimer) clearTimeout(hideDelayTimer);
+            hideDelayTimer = setTimeout(function () {
+                hideDelayTimer = null;
+                info.animate({
+                    top: '-=' + distance + 'px',
+                    opacity: 0
+                }, time, 'swing', function () {
+                    shown = false;
+                    info.css('display', 'none');
+                });
+
+            }, hideDelay);
+
+            return false;
+        });
+    });
+});
+//-->
+</script>

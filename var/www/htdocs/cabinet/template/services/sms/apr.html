@@ -1,0 +1,9 @@
+<div>На указанный номер отправлена SMS с кодом подтверждения. Введите пришедший код и нажмите кнопку "Отправить".</div>
+
+<div class="sms_form">
+<form method="post" action="{$BASE_URL}?services&sms&phupdate">
+<label>Введите код подтверждения:</label>
+<input type="text" name="apr_code" value="" />
+<input type="submit" value="Отправить" />
+</form>
+</div>

@@ -1,0 +1,21 @@
+{extends file="page.html"}
+{block name="login_form"}
+<script>
+    $('div.search').hide();
+    $('div.menu').hide();
+</script>
+
+<div class="loginForm">
+    <form method="post" action="{$BASE_URL}">
+{if $CHECK_AUTH_RESULT == -1 }
+	<div class="lineAuthErr">Аутентификация не удалась!</div>
+	<div class="clr"></div>
+{/if}
+	<div class="line"><label>Имя пользователя:</label><input type="text" name="login" value="{$LOGIN}" /></div>
+	<div class="clr"></div>
+	<div class="line"><label>Пароль:</label><input type="password" name="password" value="" /></div>
+	<div class="clr"></div>
+	<div class="lineSubmit"><input type="submit" value="Войти" /></div>
+    </form>
+</div>
+{/block}

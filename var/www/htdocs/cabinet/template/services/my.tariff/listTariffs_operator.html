@@ -1,0 +1,110 @@
+<style>
+.trfline { height: 72px; padding:2px; border: 0px solid #000; position:relative; }
+.trfline .info { float:left; width:570px; }
+.trfline .info .trftitle { font: bold 14px Tahoma; padding-bottom: 2px; border-bottom: 1px dashed #aaa; }
+.trfline .info .trftitle span { font: normal 10px Arial; }
+.trfline .info .descr { font: normal 8px; margin: 1px; }
+
+.trfline .image { float:left; width:220px; margin: 2px; padding:0px; border: 1px solid #afafaf; }
+.trfline .image img { margin:0px; }
+
+.trfline .buttons { float:right; width: 100px; text-align:center; margin-right: 4px;}
+.trfline .buttons ul { margin:2px; padding:0px; }
+.trfline .buttons ul li { display:block; list-style:none; padding: 2px; border: 1px solid #d9d9d9; background:#eee; margin:1px 0px 1px 0px;}
+.trfline .buttons ul li a { text-decoration:none; color:#666; }
+
+.trfline .popup { display:none; position:absolute; border:1px solid #eee;z-index:10;background:#fefefe; -webkit-box-shadow: 0 -0px 10px rgba(0,0,0,0.5);-moz-box-shadow: 0 0 10px rgba(0,0,0,0.5); box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+.tl0 { background: #f9f9f9; }
+
+.paginator { display:block; margin-left:300px;}
+</style>
+{$i=0}
+{foreach $TRF_LIST as $trf}
+{if $i==0}{$i=1}{else}{$i=0}{/if}
+<div class="trfline tl{$i}">
+    <div class="info">
+	<div class="trftitle">{$trf["name"]}<br /><span>(Средняя скорость: <b>{$trf["mspeed"]} Мбит/с</b>; Стоимость в месяц: <b>{$trf["cost"]} руб.</b>)</span></div>
+	<div class="descr">{$trf["descr"]}</div>
+    </div>
+    <div class="image">
+	<img src="{$BASE_URL}/images/tariffs/{$trf["simg"]}" />
+    </div>
+    <div class="buttons">
+	<ul>
+	    <li><a href="{$BASE_URL}{$SERVICE_URL}{$AJAX}&operator&choose={$trf["id"]}">Выбрать тариф</a></li>
+	</ul>
+    </div>
+    <div class="popup">
+	<img src="{$BASE_URL}/images/tariffs/{$trf["bimg"]}" />
+    </div>
+</div>
+<div class="clr"></div>
+{/foreach}
+
+{if 0 }
+<div class="paginator">
+    <a href="{$PAGINATOR["prev"]}">Предидущая страница</a>&nbsp;|&nbsp;<a href="{$PAGINATOR["next"]}">Следующая страница</a>
+</div>
+{/if}
+
+<script>
+$(".buttons a").click(function(){ 
+    var oldhref = $("#createForm").attr('href');
+    $("#createForm").attr('href', $(this).attr('href'));
+    $("#createForm").click();
+    $("#createForm").attr('href', oldhref);
+    return false;
+});
+
+
+$(".trfline").each(function() { 
+    var distance = 10;
+    var time = 250;
+    var hideDelay = 200;
+
+    var hideDelayTimer = null;
+
+    var beingShown = false;
+    var shown = false;
+    var trigger = $('.image', this);
+    var info = $('.popup', this).css('opacity', 0);
+
+    $([trigger.get(0), info.get(0)]).mouseover(function () {
+        if (hideDelayTimer) clearTimeout(hideDelayTimer);
+        if (beingShown || shown) {
+            // don't trigger the animation again
+            return;
+        } else {
+            // reset position of info box
+            beingShown = true;
+
+            info.css({
+                top: 0,
+                left: 200,
+                display: 'block'
+            }).animate({
+                top: '+=' + distance + 'px',
+                opacity: 1
+            }, time, 'swing', function() {
+                beingShown = false;
+                shown = true;
+            });
+        }
+
+        return false;
+    }).mouseout(function () {
+        if (hideDelayTimer) clearTimeout(hideDelayTimer);
+        hideDelayTimer = setTimeout(function () {
+            hideDelayTimer = null;
+            info.animate({
+                top: '-=' + distance + 'px',
+                opacity: 0
+            }, time, 'swing', function () {
+                shown = false;
+                info.css('display', 'none');
+            });
+        }, hideDelay);
+	return false;
+    });
+});
+</script>

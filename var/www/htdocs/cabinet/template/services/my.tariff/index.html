@@ -1,0 +1,41 @@
+
+<div class="infoBlock">
+    <div class="title">Учётная запись: {$ACCOUNT_NAME}</div><div class="clr"></div>
+    <div class="line"><label>Текущий тариф:</label><span>{$CURRENT_TARIFF_TITLE}</span></div><div class="clr"></div>
+    <div class="line"><label>Абонентная плата:</label><span>{$CURRENT_TARIFF_COST} руб.</span></div><div class="clr"></div>
+    <div class="spacer"></div><div class="clr"></div>
+    <div class="line"><label>Тариф на следующий месяц:</label><span>{$NEXT_TARIFF_TITLE}</span></div><div class="clr"></div>
+    <div class="line"><label>Абонентная плата:</label><span>{$NEXT_TARIFF_COST} руб.</span></div><div class="clr"></div>
+    <div class="spacer"></div><div class="clr"></div>
+    <div class="line"><label>Дата следующего списания:</label><span>{$CURRENT_TARIFF_DATE|date_format:"%d %b %Y"}</span></div><div class="clr"></div>
+
+</div>
+
+<div class="infoSpacer">
+<div class="infoText">Смена тарифа:</div>
+<div class="clr"></div>
+
+<div class="infoBlock2">
+    <div class="title">Мои тарифы (<a id="createForm" name="createForm" href="{$SERVICE_URL}&ajax&createForm">создать свой тариф</a>)</div><div class="clr"></div>
+    
+    <div class="list" rel="my">
+    </div>
+</div>
+
+<div class="infoBlock2">
+    <div class="title">Тарифы абонентов</div><div class="clr"></div>
+    <div class="list" rel="shared">
+    </div>
+</div>
+
+<div class="infoBlock2">
+    <div class="title">Наши тарифы</div><div class="clr"></div>
+    
+    <div class="list" rel="operator">
+    </div>
+</div>
+
+<script>
+$("#createForm").click(function(){ $(".infoBlock2").each( function() { if($('.list', this).css('display') != 'none') $('.title', this).click(); });$("#ajaxContainer").css({ position: 'absolute',display: 'block',left: 0, top: 200, border: '0px solid #000',width: '100%'});$("#ajaxContent").load($(this).attr('href'));return false;});
+$(".infoBlock2").each(function(){ var shown=false;var trigger=$('.title', this);var info=$('.list',this);$(trigger).click(function(){ if(shown){ shown=false;info.hide('slow');info.html('&nbsp;'); } else { info.slideDown("slow");shown=true;taddr="{$BASE_URL}{$SERVICE_URL}&ajax&getlist="+info.attr("rel");info.load(taddr);};});});
+</script>

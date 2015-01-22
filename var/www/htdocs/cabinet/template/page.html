@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>LUGLink.Net Member Area: {$TITLE}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="{$BASE_URL}?css=style.css" rel="stylesheet" type="text/css" />
+    <link href="{$BASE_URL}?css=select.css" rel="stylesheet" type="text/css" />
+    <link href="{$BASE_URL}?css=tablesorter.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="{$BASE_URL}js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}js/jquery.form.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}js/jquery.iphone-switch.js"></script>
+    
+    <script type="text/javascript" src="{$BASE_URL}js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}js/jquery.tablesorter.pager.js"></script>
+
+    <script type="text/javascript" src="{$BASE_URL}js/cufon-yui.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}js/droid_sans_400-droid_sans_700.font.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}js/cuf_run.js"></script>
+
+    <script type="text/javascript" src="{$BASE_URL}js/myselect.js"></script>
+</head>
+
+<body>
+
+<div id="ajaxContainer" name="ajaxContainer">
+    <div class="ajaxContentBorder">
+	<div class="close" id="ajaxClose" name="ajaxClose">Закрыть</div>
+        <div id="ajaxContent" name="ajaxContent"></div>
+    </div>
+</div>
+
+
+<div class="main">
+<!-- Header -->
+<div class="header">
+    <div class="header_resize">
+        <div class="logo"><h1><a href="{$BASE_URL}"><span>LUGLink</span>.Net<small>Personal member area</small></a></h1></div>
+{if $ACCOUNT_ACTIVE > 0}
+        <div class="search">
+            <form id="form1" name="form1" method="post" action="{$BASE_URL}?session&change_accid">
+                <span>Учётная запись:
+                    <select name="blogin" id="blogin">
+{foreach $ACCOUNTS as $acc}
+			<option value="{$acc["Number"]}"{if $ACCOUNT_ACTIVE == $acc["Number"]} selected{/if}>{$acc["AccName"]}</option>
+{/foreach}
+                    </select>
+                </span>
+            </form>
+       </div>
+{/if}
+        <div class="clr"></div>
+
+        <div class="menu">
+            <ul>
+{foreach $MAIN_MENU as $m_addr=>$m_title}
+    <li><a href="{$BASE_URL}?{$m_addr}"{if $m_addr eq $CURRENT_MAIN_MENU_POSITION} class="active"{/if}><span>{$m_title}</span></a></li>
+{/foreach}
+            </ul>
+            <div class="clr"></div>
+        </div>
+
+        <div class="clr"></div>
+    </div>
+</div>
+<!-- Header -->
+
+<!-- Body -->
+{block name="login_form"}&nbsp;{/block}
+<div class="body"><div class="body_resize">
+{$PAGE_DATA}
+</div></div>
+<!-- Body -->
+
+<!-- Footer -->
+    <div class="clr"></div>
+    <div class="footer">
+        <div class="footer_resize">
+            <h3>&nbsp;</h3>
+            <p>© МАОУДОД "ЦДОД "Компьютерный Центр"</p>
+        </div>
+        <div class="clr"></div>
+    </div>
+<!-- Footer -->
+
+</div>
+
+<script>
+$("#ajaxClose").click(function() {
+    $("#ajaxContent").html("");
+    $("#ajaxContainer").css({
+	display: 'none'
+    });
+});
+</script>
+</body>
+</html>

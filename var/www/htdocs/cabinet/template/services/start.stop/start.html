@@ -1,0 +1,11 @@
+<script>
+    $("#sw").attr('disabled', '');
+</script>
+{if $SW_ERR==0}
+<span style="font:bold 14px Tahoma">Услуга заказана с {$SERVICE_DATE|date_format:"%d %b %Y"}</span>
+{else}
+<span style="font:bold 14px Tahoma;color:#dd0000;">{$ERR_STR}</span>
+<script>
+    $("#sw").html("").css({ height:"0px", width:"0px" });
+</script>
+{/if}

@@ -1,0 +1,99 @@
+<div class="infoBlock">
+    <div class="title">История платежей</div><div class="clr"></div>
+    
+    <table border="0" cellpadding="0" cellspacing="1" class="tablesorter" id="pays" name="pays">
+    <thead>
+	<th>Дата платежа</th>
+	<th>Сумма платежа</th>
+	<th>Место платежа</th>
+    </thead>
+    <tbody>
+{foreach $PAYLIST as $pay}
+	<tr>
+	    <td>{$pay["PayDate"]|date_format:"%Y/%m/%d"}</td>
+	    <td>{$pay["SumInRubles"]}</td>
+	    <td>{$pay["PaySource"]}</td>
+	</tr>
+{/foreach}
+    </tbody>
+    </table>
+    
+    <div class="clr"></div>
+    
+    <div style="height:20px;">
+    
+    <div id="pager" class="pager">
+    <form onSubmit="">
+            <img src="{$BASE_URL}images/tablesorter/first.png" class="first"/>
+            <img src="{$BASE_URL}images/tablesorter/prev.png" class="prev"/>
+            <input type="text" class="pagedisplay" readonly />
+            <img src="{$BASE_URL}images/tablesorter/next.png" class="next"/>
+            <img src="{$BASE_URL}images/tablesorter/last.png" class="last"/>
+            <select class="pagesize">
+                <option value="5">5</option>
+                <option selected="selected"  value="10">10</option>
+                <option value="15">15</option>
+            </select>
+    </form>
+    </div>
+    
+    </div>
+    
+    <script>
+	$("#pays")
+	    .tablesorter( { sortList: [[0,1]] } )
+	    .tablesorterPager( { container: $("#pager") } );
+    </script>
+</div>
+
+<div class="infoSpacer"></div>
+
+<div class="infoBlock">
+    <div class="title">История списаний</div><div class="clr"></div>
+
+    <table border="0" cellpadding="0" cellspacing="1" class="tablesorter" id="debets" name="debets">
+    <thead>
+	<th>Дата</th>
+	<th>Сумма</th>
+	<th>Учётная запись</th>
+	<th>Тариф</th>
+    </thead>
+    <tbody>
+{foreach $DEBETS as $debet}
+	<tr>
+	    <td>{$debet["Date"]|date_format:"%Y/%m/%d"}</td>
+	    <td>{$debet["Cost"]}</td>
+	    <td>{$debet["Account"]}</td>
+	    <td>{$debet["Tariff"]}</td>
+	</tr>
+{/foreach}
+    </tbody>
+    </table>
+    
+    <div class="clr"></div>
+    
+    <div style="height:20px;">
+    
+    <div id="pagerDebets" class="pager">
+    <form onSubmit="">
+            <img src="{$BASE_URL}images/tablesorter/first.png" class="first"/>
+            <img src="{$BASE_URL}images/tablesorter/prev.png" class="prev"/>
+            <input type="text" class="pagedisplay" readonly />
+            <img src="{$BASE_URL}images/tablesorter/next.png" class="next"/>
+            <img src="{$BASE_URL}images/tablesorter/last.png" class="last"/>
+            <select class="pagesize">
+                <option value="5">5</option>
+                <option selected="selected"  value="10">10</option>
+                <option value="15">15</option>
+            </select>
+    </form>
+    </div>
+    
+    </div>
+    
+    <script>
+	$("#debets")
+	    .tablesorter( { sortList: [[0,1]] } )
+	    .tablesorterPager( { container: $("#pagerDebets") } );
+    </script>
+</div>
