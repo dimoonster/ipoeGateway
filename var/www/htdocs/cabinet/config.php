@@ -40,7 +40,7 @@ $db["name"] = "BILLING-DB";
 
 // SMSC Config
 define("SMSC_LOGIN", "comp_center");
-define("SMSC_PASSWORD", "VbpQ51z8");
+define("SMSC_PASSWORD", "-#-");
 define("SMSC_POST", 0);
 define("SMSC_HTTPS", 0);
 define("SMSC_CHARSET", "utf-8");
