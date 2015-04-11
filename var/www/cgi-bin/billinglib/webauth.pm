@@ -38,9 +38,9 @@ if(!$ENV{REMOTE_USER}) {
 sub radius_auth() {
   my $user = shift;
   my $pwd = shift;
-  my $radius_host = "172.16.1.22:1645";
-  my $radius_key  = "testing123";
-  my $nas = "172.16.1.15";
+  my $radius_host = "172.16.1.xx:1645";
+  my $radius_key  = "testing";
+  my $nas = "172.16.1.xx";
 
   my $radius = new Authen::Radius(Host => $radius_host, Secret => $radius_key, Debug => 0);
   my $rv = $radius->check_pwd($user, $pwd, $nas) ? 0 : 1;
