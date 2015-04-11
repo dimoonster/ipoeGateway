@@ -5,7 +5,7 @@ use Socket;
 
 require "/opt/ipoev2/etc/ipoe.conf";
 
-$dbh = DBI->connect("DBI:mysql:dhcp:localhost", "root", "g[gvfqflvby") or die $!;
+$dbh = DBI->connect("DBI:mysql:dhcp:localhost", "root", "-@-") or die $!;
 $sth = $dbh->prepare("select ipaddr, interface from leases where state=2 and nasid=$NAS");
 $sth->execute() or die $!;
 
