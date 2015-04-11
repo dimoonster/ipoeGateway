@@ -21,7 +21,7 @@ sub new {
     
     bless($self, $class);
     
-    # Запомним инициализирующую информацию
+    # Г‡Г ГЇГ®Г¬Г­ГЁГ¬ ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГѕГ№ГіГѕ ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ
     die "Unknown user class!" unless $vars{'USER'};
     die "Unknown params!" unless $vars{'PARAMS'};
     
@@ -29,10 +29,10 @@ sub new {
     $self->{'PARAMS'} = $vars{'PARAMS'};
     
 
-    my $my_host = "mysql2.luga.ru";
+    my $my_host = "host";
     my $my_user = "root";
-    my $my_pass = "g[gvfqflvby";
-    my $my_dbname = "cisco";
+    my $my_pass = "---000---";
+    my $my_dbname = "ciscologdb";
     
     my $my_dsn = 'DBI:mysql:'.$my_dbname.':'.$my_host;
     
@@ -82,10 +82,10 @@ sub show_ext_detail() {
     $day += 1;
     $mounth += 1;
     
-    my @mounths = ("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря");
+    my @mounths = ("ГїГ­ГўГ Г°Гї", "ГґГҐГўГ°Г Г«Гї", "Г¬Г Г°ГІГ ", "Г ГЇГ°ГҐГ«Гї", "Г¬Г Гї", "ГЁГѕГ­Гї", "ГЁГѕГ«Гї", "Г ГўГЈГіГ±ГІГ ", "Г±ГҐГ­ГІГїГЎГ°Гї", "Г®ГЄГІГїГЎГ°Гї", "Г­Г®ГїГЎГ°Гї", "Г¤ГҐГЄГ ГЎГ°Гї");
     
     my $template = HTML::Template->new(filename => 'tpls/admin_index_traf_detail.html', case_sensitive => 0);
-    $template->param(PAGETITLE => "Статистика пользования");
+    $template->param(PAGETITLE => "Г‘ГІГ ГІГЁГ±ГІГЁГЄГ  ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГї");
     $template->param(SCRIPT_NAME => $ENV{SCRIPT_NAME});
     $template->param(MOUNTH => $mounths[$mounth-1]);
     $template->param(YEAR => $year);
@@ -141,10 +141,10 @@ sub show_int_detail() {
     $day += 1;
     $mounth += 1;
     
-    my @mounths = ("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря");
+    my @mounths = ("ГїГ­ГўГ Г°Гї", "ГґГҐГўГ°Г Г«Гї", "Г¬Г Г°ГІГ ", "Г ГЇГ°ГҐГ«Гї", "Г¬Г Гї", "ГЁГѕГ­Гї", "ГЁГѕГ«Гї", "Г ГўГЈГіГ±ГІГ ", "Г±ГҐГ­ГІГїГЎГ°Гї", "Г®ГЄГІГїГЎГ°Гї", "Г­Г®ГїГЎГ°Гї", "Г¤ГҐГЄГ ГЎГ°Гї");
     
     my $template = HTML::Template->new(filename => 'tpls/admin_index_traf_detail.html', case_sensitive => 0);
-    $template->param(PAGETITLE => "Статистика пользования");
+    $template->param(PAGETITLE => "Г‘ГІГ ГІГЁГ±ГІГЁГЄГ  ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГї");
     $template->param(SCRIPT_NAME => $ENV{SCRIPT_NAME});
     $template->param(MOUNTH => $mounths[$mounth-1]);
     $template->param(YEAR => $year);
@@ -217,11 +217,11 @@ sub show_by_mounth() {
     my $year = shift;
     my $mounth = shift;
 
-    my @mounths = ("январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь");
+    my @mounths = ("ГїГ­ГўГ Г°Гј", "ГґГҐГўГ°Г Г«Гј", "Г¬Г Г°ГІ", "Г ГЇГ°ГҐГ«Гј", "Г¬Г Г©", "ГЁГѕГ­Гј", "ГЁГѕГ«Гј", "Г ГўГЈГіГ±ГІ", "Г±ГҐГ­ГІГїГЎГ°Гј", "Г®ГЄГІГїГЎГ°Гј", "Г­Г®ГїГЎГ°Гј", "Г¤ГҐГЄГ ГЎГ°Гј");
     my @days = (31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
     
     my $template = HTML::Template->new(filename => 'tpls/admin_index_traf_mounth.html', case_sensitive => 0);
-    $template->param(PAGETITLE => "Статистика пользования");
+    $template->param(PAGETITLE => "Г‘ГІГ ГІГЁГ±ГІГЁГЄГ  ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГї");
     $template->param(SCRIPT_NAME => $ENV{SCRIPT_NAME});
     $template->param(MOUNTH => $mounths[$mounth]);
     $template->param(YEAR => $year);
@@ -237,14 +237,14 @@ sub show_by_mounth() {
       $temp[$i]{'DAY'} = $i+1;
       
       my $traf = $self->get_day_pay_traf($year, $mounth+1, $i+1);
-      $temp[$i]{'PAY'} = sprintf("%.2f Мбайт", $traf/1024/1024);
+      $temp[$i]{'PAY'} = sprintf("%.2f ГЊГЎГ Г©ГІ", $traf/1024/1024);
 
       my $traf = $self->get_day_free_traf($year, $mounth+1, $i+1);
-      $temp[$i]{'FREE'} = sprintf("%.2f Мбайт", $traf/1024/1024);
+      $temp[$i]{'FREE'} = sprintf("%.2f ГЊГЎГ Г©ГІ", $traf/1024/1024);
       
-      $temp[$i]{'DET1'} = "(<a href=\"/admin?page=index&action=user&uid=".$self->{'uid'}."&accid=".$self->{'accid'}."&cmd=stat&act=det2&year=".$year."&mounth=".$mounth."&day=".$i."\">Подробнее</a>)";
-      $temp[$i]{'DET2'} = "(<a href=\"/admin?page=index&action=user&uid=".$self->{'uid'}."&accid=".$self->{'accid'}."&cmd=stat&act=det3&year=".$year."&mounth=".$mounth."&day=".$i."\">Подробнее</a>)";
-#      $temp[$i]{'DET2'} = "(<a href=\"/admin?page=traf&act=det3&year=".$year."&mounth=".$mounth."&day=".$i."\">Подробнее</a>)";
+      $temp[$i]{'DET1'} = "(<a href=\"/admin?page=index&action=user&uid=".$self->{'uid'}."&accid=".$self->{'accid'}."&cmd=stat&act=det2&year=".$year."&mounth=".$mounth."&day=".$i."\">ГЏГ®Г¤Г°Г®ГЎГ­ГҐГҐ</a>)";
+      $temp[$i]{'DET2'} = "(<a href=\"/admin?page=index&action=user&uid=".$self->{'uid'}."&accid=".$self->{'accid'}."&cmd=stat&act=det3&year=".$year."&mounth=".$mounth."&day=".$i."\">ГЏГ®Г¤Г°Г®ГЎГ­ГҐГҐ</a>)";
+#      $temp[$i]{'DET2'} = "(<a href=\"/admin?page=traf&act=det3&year=".$year."&mounth=".$mounth."&day=".$i."\">ГЏГ®Г¤Г°Г®ГЎГ­ГҐГҐ</a>)";
     };
 #    print $self->get_day_pay_traf($year, $mounth, 1);
 
@@ -256,10 +256,10 @@ sub show_by_mounth() {
 sub show_by_year {
   my ($self, $type) = @_;
 
-    my @mounths = ("январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь");
+    my @mounths = ("ГїГ­ГўГ Г°Гј", "ГґГҐГўГ°Г Г«Гј", "Г¬Г Г°ГІ", "Г ГЇГ°ГҐГ«Гј", "Г¬Г Г©", "ГЁГѕГ­Гј", "ГЁГѕГ«Гј", "Г ГўГЈГіГ±ГІ", "Г±ГҐГ­ГІГїГЎГ°Гј", "Г®ГЄГІГїГЎГ°Гј", "Г­Г®ГїГЎГ°Гј", "Г¤ГҐГЄГ ГЎГ°Гј");
 
     my $template = HTML::Template->new(filename => 'tpls/admin_index_traf_choose.html', case_sensitive=> 0);
-    $template->param(PAGETITLE => "Статистика пользования");
+    $template->param(PAGETITLE => "Г‘ГІГ ГІГЁГ±ГІГЁГЄГ  ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГї");
     $template->param(SCRIPT_NAME => $ENV{SCRIPT_NAME});
     my $user_full = $self->{'fullname'};
     $template->param(USER_FULL => $user_full);
@@ -289,18 +289,18 @@ sub show_by_year {
 
 	$traf = $self->get_sum_pay_traf($years[$i], $j+1);
 	$tot_pay_traf += $traf;
-	$temp_sub[$j]{'PAY_TRAF'} = ($traf==0?'n/a':sprintf("%.2f Мбайт", $traf/1024/1024));
+	$temp_sub[$j]{'PAY_TRAF'} = ($traf==0?'n/a':sprintf("%.2f ГЊГЎГ Г©ГІ", $traf/1024/1024));
 
         $traf = $self->get_sum_free_traf($years[$i], $j+1);
 	$tot_free_traf += $traf;
-	$temp_sub[$j]{'FREE_TRAF'} = ($traf==0?'n/a':sprintf("%.2f Мбайт", $traf/1024/1024));
+	$temp_sub[$j]{'FREE_TRAF'} = ($traf==0?'n/a':sprintf("%.2f ГЊГЎГ Г©ГІ", $traf/1024/1024));
 	
 	$temp_sub[$j]{'DET_LINK'} = "/admin?page=index&action=user&uid=".$self->{'uid'}."&accid=".$self->{'accid'}."&cmd=stat&act=det1&year=".$years[$i]."&mounth=".$j;
       };
       
-      $temp_data[$i]{'TOTAL_FREE'} = sprintf("%.2f Мбайт", $tot_free_traf/1024/1024);
-      $temp_data[$i]{'TOTAL_PAY'} = sprintf("%.2f Мбайт", $tot_pay_traf/1024/1024);
-      $temp_data[$i]{'TOTAL_TRAF'} = sprintf("%.2f Мбайт", ($tot_free_traf+$tot_pay_traf)/1024/1024);
+      $temp_data[$i]{'TOTAL_FREE'} = sprintf("%.2f ГЊГЎГ Г©ГІ", $tot_free_traf/1024/1024);
+      $temp_data[$i]{'TOTAL_PAY'} = sprintf("%.2f ГЊГЎГ Г©ГІ", $tot_pay_traf/1024/1024);
+      $temp_data[$i]{'TOTAL_TRAF'} = sprintf("%.2f ГЊГЎГ Г©ГІ", ($tot_free_traf+$tot_pay_traf)/1024/1024);
             
       $temp_data[$i]{'YEAR_DET_INFO'} = [@temp_sub];
     };
